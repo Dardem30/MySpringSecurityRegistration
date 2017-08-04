@@ -11,6 +11,10 @@
         <property name="hbm2ddl.auto">update</property>
         <mapping  class="by.model.Role"/>
         <mapping class="by.model.User"/>
+        <mapping class="by.model.Employee"/>
+        <mapping class="by.model.Department"/>
+        <mapping class="by.model.Message"/>
+
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

@@ -2,6 +2,7 @@ package by.DAO;
 
 import by.model.User;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 /**
@@ -21,6 +22,19 @@ public class DAOUserImpl implements DAOUser {
         User user= (User) query.uniqueResult();
         return user;
     }
+
+    @Override
+    public void updateUser(User user) {
+        Session session=this.sessionFactory.getCurrentSession();
+        session.update(user);
+    }
+
+    @Override
+    public User findById(int id) {
+        User user= (User) this.sessionFactory.getCurrentSession().get(User.class,id);
+        return user;
+    }
+
     public void saveUser(User user){
         this.sessionFactory.getCurrentSession().persist(user);
     }

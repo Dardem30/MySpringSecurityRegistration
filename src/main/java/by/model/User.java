@@ -20,10 +20,21 @@ public class User {
     private String password;
     @Transient
     private String confirmPassword;
-@ManyToMany
+@ManyToMany(fetch = FetchType.EAGER)
 @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "role_id"),
 inverseJoinColumns = @JoinColumn(name = "user_id"))
 private Set<Role> roles;
+@ManyToOne
+@JoinColumn(name = "employee_id")
+private Employee employee;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public Set<Role> getRoles() {
         return roles;

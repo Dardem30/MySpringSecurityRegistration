@@ -34,6 +34,9 @@
             <list>
                 <value>by.model.User</value>
                 <value>by.model.Role</value>
+                <value>by.model.Employee</value>
+                <value>by.model.Department</value>
+                <value>by.model.Message</value>
             </list>
         </property>
         <property name="hibernateProperties">

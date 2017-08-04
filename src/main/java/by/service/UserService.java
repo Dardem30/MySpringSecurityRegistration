@@ -2,6 +2,7 @@ package by.service;
 
 import by.DAO.DAORoleImpl;
 import by.DAO.DAOUserImpl;
+import by.model.Employee;
 import by.model.Role;
 import by.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,9 @@ public class UserService {
     @Transactional
     public void saveUser(User user) {
         Set<Role> roles=new HashSet<>();
-        roles.add(daoRole.getRoleById(2));
+        roles.add(daoRole.getRoleById(1));
         user.setRoles(roles);
     this.daoUser.saveUser(user);
     }
+
     }

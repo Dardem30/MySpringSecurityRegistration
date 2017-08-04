@@ -7,4 +7,6 @@ import by.model.User;
  */
 public interface DAOUser {
     User findByUsername(String username);
+    void updateUser(User user);
+    User findById(int id);
 }
