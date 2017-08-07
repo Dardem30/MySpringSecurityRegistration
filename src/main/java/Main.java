@@ -82,19 +82,19 @@ public class Main {
 //                }
 //            }
             /////////////////////////////////////////////////////////////////////////////////////////
-            List<User> userList2=session.createQuery("from User ").list();
-            List<Employee> employeeList=new ArrayList<>();
-            for(User user: userList2){
-                for(Role role1: user.getRoles()){
-                    if((role1.getName()).equals("ROLE_ADMIN")){
-                       employeeList.add(user.getEmployee());
-
-                    }else {
-                        System.out.println("user");
-                    }
-                }
-            }
-            System.out.println(employeeList);
+//            List<User> userList2=session.createQuery("from User ").list();
+//            List<Employee> employeeList=new ArrayList<>();
+//            for(User user: userList2){
+//                for(Role role1: user.getRoles()){
+//                    if((role1.getName()).equals("ROLE_ADMIN")){
+//                       employeeList.add(user.getEmployee());
+//
+//                    }else {
+//                        System.out.println("user");
+//                    }
+//                }
+//            }
+//            System.out.println(employeeList);
  session.getTransaction().commit();
         } finally {
             session.close();

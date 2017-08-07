@@ -21,6 +21,7 @@
     <context:annotation-config></context:annotation-config>
     <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources1/**" location="/resources1/"/>
     <bean id="dataSourse" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://localhost:3306/mysecurity"></property>
@@ -37,6 +38,7 @@
                 <value>by.model.Employee</value>
                 <value>by.model.Department</value>
                 <value>by.model.Message</value>
+                <value>by.model.EmployeeDate</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -54,6 +56,9 @@
     </bean>
     <bean id="daoRole" class="by.DAO.DAORoleImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+    <bean id="serviceRole" class="by.service.RoleService">
+
     </bean>
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></property>

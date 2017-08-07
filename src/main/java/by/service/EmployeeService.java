@@ -42,4 +42,12 @@ public class EmployeeService {
     public List<Employee> getEmployeeListAdmin(){
         return this.daoEmployee.getEmployeeListAdmin();
     }
-}
+    @Transactional
+    public List<Employee> getListEmployee(){
+        return this.daoEmployee.getListEmployee();
+    }
+    @Transactional
+    public void saveEmployee(Employee employee) {
+    this.daoEmployee.saveEmployee(employee);
+    }
+    }

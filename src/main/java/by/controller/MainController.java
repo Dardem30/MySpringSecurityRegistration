@@ -1,12 +1,10 @@
 package by.controller;
 
 import by.DAO.DAORole;
-import by.model.Employee;
-import by.model.Message;
-import by.model.Role;
-import by.model.User;
+import by.model.*;
 import by.service.EmployeeService;
 import by.service.MessageService;
+import by.service.ServiceEmployeeDate;
 import by.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +27,8 @@ import java.util.Set;
 @Controller
 public class MainController {
     @Autowired
+    private ServiceEmployeeDate serviceEmployeeDate;
+    @Autowired
     private MessageService messageService;
     @Autowired
     @Qualifier("serviceUser")
@@ -49,6 +49,7 @@ public class MainController {
         modelAndView.addObject("listEmployee",employeeService.listEmployee());
         modelAndView.addObject("message",new Message());
         modelAndView.addObject("listAdmin",employeeService.getEmployeeListAdmin());
+        modelAndView.addObject("employeeDate",new EmployeeDate());
         return modelAndView;
     }
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -56,12 +57,27 @@ public class MainController {
         return "login";
     }
     @RequestMapping(value = "/registration",method = RequestMethod.GET)
-    public String registration(Model model){
-        model.addAttribute("userForm",new User());
-        return "registration";
+    public ModelAndView registration(){
+        ModelAndView modelAndView=new ModelAndView("registrationEmployee");
+        modelAndView.addObject("employee",new Employee());
+        modelAndView.addObject("listDepartment",employeeService.getListDepartment());
+        return modelAndView;
     }
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm")User user){
+    public String registration(@ModelAttribute("employee")Employee employee,Model model){
+        employeeService.saveEmployee(employee);
+        model.addAttribute("employee",employee);
+        return "redirect:/registrationUser";
+    }
+    @RequestMapping(value = "/registrationUser",method = RequestMethod.GET)
+    public String registrationUser(@ModelAttribute("employee")Employee employee, Model model){
+        model.addAttribute("userForm",new User());
+        model.addAttribute("employee",employee);
+        return "registration";
+    }
+    @RequestMapping(value = "/registrationUser",method = RequestMethod.POST)
+    public String registrationUser(@ModelAttribute("userForm")User user,@ModelAttribute("employee")Employee employee){
+        user.setEmployee(employee);
         userService.saveUser(user);
         return "redirect:/login";
     }
@@ -79,6 +95,17 @@ public class MainController {
     @RequestMapping(value = "/sendMessageToAdminEmployee",method = RequestMethod.POST)
     public String sendMessageToEmployee(@ModelAttribute("message")Message message){
         messageService.sendMessageById(message);
+        return "redirect:/";
+    }
+  @RequestMapping(value = "/saveEmployeeDate",method = RequestMethod.GET)
+  public ModelAndView saveEmployeeDate(){
+        ModelAndView modelAndView=new ModelAndView("saveDate");
+        modelAndView.addObject("employeeDate",new EmployeeDate());
+        return modelAndView;
+  }
+    @RequestMapping(value = "/saveEmployeeDate",method = RequestMethod.POST)
+    public String saveEmployeeDate(@ModelAttribute("employeeDate")EmployeeDate employeeDate){
+        this.serviceEmployeeDate.saveEmployeeDate(employeeDate);
         return "redirect:/";
     }
 }

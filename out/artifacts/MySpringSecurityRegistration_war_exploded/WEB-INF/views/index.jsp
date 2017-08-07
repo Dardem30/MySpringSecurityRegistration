@@ -28,7 +28,8 @@ ${employee.lastname}
 <%--${message.text}--%>
 <a href="/userUpdate?id=${employee.id}">edit</a>
 <security:authorize access="hasRole('ROLE_ADMIN')">
-</br>
+    <a href="/userRole">userRole</a>
+    </br>
 <table border="1">
     <tr>
         <td>id</td>
@@ -69,5 +70,11 @@ ${employee.lastname}
     </select>
     <spring:button>send</spring:button>
 </spring:form>
+<a href="/saveEmployeeDate">saveEmployeeDate</a>
+<%--<spring:form method="post" action="/saveEmployeeDate" modelAttribute="employeeDate">--%>
+    <%--<input type="text" name="time" value="12:12:12">--%>
+    <%--<input type="date" name="date">--%>
+    <%--<input type="submit" value="ok">--%>
+<%--</spring:form>--%>
 </body>
 </html>

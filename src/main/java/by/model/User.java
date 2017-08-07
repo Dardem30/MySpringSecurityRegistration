@@ -1,6 +1,7 @@
 package by.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,9 +22,9 @@ public class User {
     @Transient
     private String confirmPassword;
 @ManyToMany(fetch = FetchType.EAGER)
-@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "role_id"),
-inverseJoinColumns = @JoinColumn(name = "user_id"))
-private Set<Role> roles;
+@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"),
+inverseJoinColumns = @JoinColumn(name = "role_id"))
+private List<Role> roles;
 @ManyToOne
 @JoinColumn(name = "employee_id")
 private Employee employee;
@@ -36,11 +37,11 @@ private Employee employee;
         this.employee = employee;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
